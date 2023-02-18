@@ -1,7 +1,7 @@
 function Header() {
     return (
-      <div class="header">
-        <div class="container">
+      <div className="header">
+        <div className="container">
           <div class="header__logo">
             <img width="38" src="./img/pizza-logo.svg" alt="Pizza logo" />
             <div>
