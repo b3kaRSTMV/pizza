@@ -1,7 +1,7 @@
 import "./scss/app.scss";
 import Header from "./componets/Header";
 import Sort from "./componets/Sort";
-import Categories from "./componets/Sort";
+import Categories from "./componets/Categories";
 import PizzaBlock from "./componets/PizzaBlock"
 
 function App() {
