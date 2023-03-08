@@ -16,10 +16,10 @@ function App() {
             <Sort />
             <h2 class="content__title">Все пиццы</h2>
             <div class="content__items">
-           <PizzaBlock title="Мексиканская" price="500"/>
-           <PizzaBlock/>
-           <PizzaBlock/>
-           <PizzaBlock/>
+              <PizzaBlock title="Мексиканская" price="500" />
+              <PizzaBlock />
+              <PizzaBlock />
+              <PizzaBlock />
             </div>
           </div>
         </div>
