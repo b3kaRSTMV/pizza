@@ -2,7 +2,9 @@ import "./scss/app.scss";
 import Header from "./componets/Header";
 import Sort from "./componets/Sort";
 import Categories from "./componets/Categories";
-import PizzaBlock from "./componets/PizzaBlock"
+import PizzaBlock from "./componets/PizzaBlock";
+import Pizzas from "./componets/Pizza.json";
+
 
 function App() {
   return (
@@ -16,10 +18,18 @@ function App() {
             <Sort />
             <h2 class="content__title">Все пиццы</h2>
             <div class="content__items">
-              <PizzaBlock title="Мексиканская" price="500" />
-              <PizzaBlock />
-              <PizzaBlock />
-              <PizzaBlock />
+              {
+                Pizzas.map((obj) => (
+                  <PizzaBlock 
+                  title={obj.title}
+                  price={obj.price}
+                  imageUrl={obj.imageUrl}
+                  sizes={obj.sizes}
+                  types={obj.types}
+                     
+                     />
+                ))
+              }
             </div>
           </div>
         </div>
