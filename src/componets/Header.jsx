@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+
 function Header() {
     return (
       <div className="header">
         <div className="container">
+          <Link to="/">
           <div class="header__logo">
             <img width="38" src="img/pizza-logo.svg" alt="Pizza logo" />
             <div>
@@ -9,6 +12,7 @@ function Header() {
               <p>самая вкусная пицца во вселенной</p>
             </div>
           </div>
+          </Link>
           <div class="header__cart">
             <a href="/cart.html" class="button button--cart">
               <span>520 ₽</span>
