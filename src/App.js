@@ -6,14 +6,16 @@ import NodeFound from "./pages/NodeFound";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
+const [searchValue, setSearchValue] = React.useState('');
+
   return (
     <div className="App">
       <div class="wrapper">
-        <Header />
+        <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         <div class="content">
           <div class="container">
             <Routes>
-              <Route path="/" element={<Home />}></Route>
+              <Route path="/" element={<Home searchValue={searchValue} />}></Route>
               <Route path="*" element={<NodeFound />}></Route>
             </Routes>
 
@@ -21,7 +23,8 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  ) ;
 }
+
 
 export default App;

@@ -4,7 +4,7 @@ import Sort from "../componets/Sort";
 import PizzaBlock from "../componets/PizzaBlock";
 import { useState } from "react";
 
-const Home = () => {
+const Home = ({searchValue}) => {
   const [items, setItems] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
@@ -27,6 +27,13 @@ const Home = () => {
         setItems(arr);
       });
   }, [categoryId, sortType]);
+
+  const pizzas = items.filter(obj => {
+    if (obj.title.toLowerCase().includes(searchValue.toLowerCase())){
+      return true;
+    }
+    return false;
+  }).map((obj) => (<PizzaBlock  key={obj.id} {...obj}/>))
   return (
     <>
       <div class="content__top">
@@ -39,16 +46,7 @@ const Home = () => {
 
       <h2 class="content__title">Все пиццы</h2>
       <div class="content__items">
-        {items.map((obj) => (
-          <PizzaBlock
-            key={obj.id}
-            title={obj.title}
-            price={obj.price}
-            imageUrl={obj.imageUrl}
-            sizes={obj.sizes}
-            types={obj.types}
-          />
-        ))}
+        {pizzas}
       </div>
     </>
   );
