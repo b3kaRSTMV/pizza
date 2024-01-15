@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 
-
-
-function Sort({value, onChangeSort}) {
-
+function Sort({ HomeSortType, HomeSetSortType }) {
   const list = [
-    {name: 'Популярности(DESC', sortProperty: 'rating'},
-    {name: 'Популярности(ASC', sortProperty: '-rating'},
-    {name: 'Цене(DESC', sortProperty: 'price'},
-    {name: 'Цене(ASC)', sortProperty: '-price'},
-    {name: 'Алфавиту(DESC)', sortProperty: 'title'},
-    {name: 'Алфавиту(ASC)', sortProperty: '-title'}
-];
- 
+    { name: "Популярности(DESC", sortProperty: "rating" },
+    { name: "Популярности(ASC", sortProperty: "-rating" },
+    { name: "Цене(DESC", sortProperty: "price" },
+    { name: "Цене(ASC)", sortProperty: "-price" },
+    { name: "Алфавиту(DESC)", sortProperty: "title" },
+    { name: "Алфавиту(ASC)", sortProperty: "-title" },
+  ];
 
   const [open, setOpen] = useState(false);
-  const onClickSortItem = (i) => {
-    onChangeSort(i)
-    setOpen(false)
-  }
+
+  const SelectSortItem = (SelectListValue) => {
+    HomeSetSortType(SelectListValue);
+    setOpen(false);
+  };
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -34,24 +32,34 @@ function Sort({value, onChangeSort}) {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{value.name}</span>
-      </div>
-      {open && (<div class="sort__popup">
-        <ul>
-          {
-            list.map((obj) => (
-              <li  onClick={() => onClickSortItem(obj)}
-              className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
-              {obj.name}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      )
 
-      }
+        <b>Сортировка по:</b>
+
+        <span onClick={() => setOpen(!open)}>{HomeSortType.name}</span>
+      </div>
+
+      {open && (
+        <div class="sort__popup">
+          <ul>
+            {list.map((value) => (
+              <li
+                onClick={() => SelectSortItem(value)} //Изменение состояния сортировки. было популярности по дефолту! стало тем на что кликнули. так как нажатие выполнило функцию которая передает Значение sortType и sortPropery нажатого элемента в setState. а этот setState отобразится в компоненте Home!!! и выбранный элемент поменяется!
+                className={
+                  HomeSortType.sortProperty === value.sortProperty
+                    ? "active"
+                    : ""
+                }
+              
+              >
+                {value.name}
+              </li>
+              
+              
+            ))}
+      
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

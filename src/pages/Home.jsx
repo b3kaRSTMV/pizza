@@ -41,10 +41,10 @@ const Home = ({searchValue}) => {
     <>
       <div class="content__top">
         <Categories
-          value={categoryId}
-          onChangeCategory={(i) => setCategoryId(i)}
+          HomeCategoryId={categoryId}
+          HomeSetCategoryId={(i) => setCategoryId(i)}
         />
-        <Sort value={sortType} onChangeSort={(i) => setSortType(i)} />
+        <Sort HomeSortType={sortType} HomeSetSortType={(ListValue) => setSortType(ListValue)} />
       </div>
 
       <h2 class="content__title">Все пиццы</h2>
