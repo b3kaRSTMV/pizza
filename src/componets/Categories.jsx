@@ -11,8 +11,11 @@ function Categories({ HomeCategoryId, HomeSetCategoryId }) {
   ];
   return (
     <div className="categories">
+      
       <ul>
         {categories.map((categoryName, i) => (
+          
+
           <li
             key={i}
             onClick={() => HomeSetCategoryId(i)} //изменение состояния категории на выбранный. изменение происходит по индексу выбранной категории. в setState был индекс 0 после клика передался индекс кликуемого элемента. после чего useState стал другим вместо 0!!!
@@ -20,9 +23,12 @@ function Categories({ HomeCategoryId, HomeSetCategoryId }) {
           >
             {categoryName}
           </li>
+         
         ))}
+        
       </ul>
     </div>
+    
   );
 }
 export default Categories;

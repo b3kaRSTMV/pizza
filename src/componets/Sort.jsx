@@ -1,19 +1,23 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setSort } from "../redux/slices/filter.Slice";
+const list = [
+  { name: "Популярности(DESC", sortProperty: "rating" },
+  { name: "Популярности(ASC", sortProperty: "-rating" },
+  { name: "Цене(DESC", sortProperty: "price" },
+  { name: "Цене(ASC)", sortProperty: "-price" },
+  { name: "Алфавиту(DESC)", sortProperty: "title" },
+  { name: "Алфавиту(ASC)", sortProperty: "-title" },
+];
 
-function Sort({ HomeSortType, HomeSetSortType }) {
-  const list = [
-    { name: "Популярности(DESC", sortProperty: "rating" },
-    { name: "Популярности(ASC", sortProperty: "-rating" },
-    { name: "Цене(DESC", sortProperty: "price" },
-    { name: "Цене(ASC)", sortProperty: "-price" },
-    { name: "Алфавиту(DESC)", sortProperty: "title" },
-    { name: "Алфавиту(ASC)", sortProperty: "-title" },
-  ];
+function Sort() {
+  const sort = useSelector((state) => state.filter.sort);
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
 
   const SelectSortItem = (SelectListValue) => {
-    HomeSetSortType(SelectListValue);
+    dispatch(setSort(SelectListValue));
     setOpen(false);
   };
 
@@ -35,7 +39,7 @@ function Sort({ HomeSortType, HomeSetSortType }) {
 
         <b>Сортировка по:</b>
 
-        <span onClick={() => setOpen(!open)}>{HomeSortType.name}</span>
+        <span onClick={() => setOpen(!open)}>{sort.name}</span>
       </div>
 
       {open && (
@@ -45,18 +49,12 @@ function Sort({ HomeSortType, HomeSetSortType }) {
               <li
                 onClick={() => SelectSortItem(value)} //Изменение состояния сортировки. было популярности по дефолту! стало тем на что кликнули. так как нажатие выполнило функцию которая передает Значение sortType и sortPropery нажатого элемента в setState. а этот setState отобразится в компоненте Home!!! и выбранный элемент поменяется!
                 className={
-                  HomeSortType.sortProperty === value.sortProperty
-                    ? "active"
-                    : ""
+                  sort.sortProperty === value.sortProperty ? "active" : ""
                 }
-              
               >
-                {value.name}
+                {sort.name}
               </li>
-              
-              
             ))}
-      
           </ul>
         </div>
       )}

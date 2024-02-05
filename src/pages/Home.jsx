@@ -4,18 +4,36 @@ import Sort from "../componets/Sort";
 import PizzaBlock from "../componets/PizzaBlock";
 import { useState } from "react";
 import Pagination from "../componets/Pagination/Pagination";
+import { useSelector} from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setCategoryId } from "../redux/slices/filter.Slice";
 
 const Home = ({searchValue}) => {
+const categoryId = useSelector(state => state.filter.categoryId);
+const dispatch = useDispatch()
+const sortType = useSelector(state => state.filter.sort.sortProperty)
+
+
+
+
+
+const onChangeCategory = (id) => {
+dispatch(setCategoryId(id));
+}
+
+
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const [items, setItems] = useState([]);
-  const [categoryId, setCategoryId] = useState(0);
-  const [sortType, setSortType] = useState({
-    name: 'Популярности',
-    sortProperty: 'rating',
-  });
+  // const [categoryId, setCategoryId] = useState(0);
+  // const [sortType, setSortType] = useState({
+  //   name: 'Популярности',
+  //   sortProperty: 'rating',
+  // });
 
-  const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
-  const sortBy = sortType.sortProperty.replace('-', '');
+  const order = sortType.includes('-') ? 'asc' : 'desc';
+  const sortBy = sortType.replace('-', '');
   const category = categoryId > 0 ? `category=${categoryId}` : '';
   const search = searchValue ? `search=${searchValue }` : '';
 
@@ -42,9 +60,12 @@ const Home = ({searchValue}) => {
       <div class="content__top">
         <Categories
           HomeCategoryId={categoryId}
-          HomeSetCategoryId={(i) => setCategoryId(i)}
+          HomeSetCategoryId={onChangeCategory}
         />
-        <Sort HomeSortType={sortType} HomeSetSortType={(ListValue) => setSortType(ListValue)} />
+
+
+        <Sort/>
+   
       </div>
 
       <h2 class="content__title">Все пиццы</h2>
@@ -52,6 +73,10 @@ const Home = ({searchValue}) => {
         {pizzas}
         
       </div>
+
+
+
+      
       <Pagination onChangePage={(number) => setCurrentPage(number)}/>
     </>
   );
