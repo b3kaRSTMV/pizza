@@ -7,6 +7,7 @@ import Pagination from "../componets/Pagination/Pagination";
 import { useSelector} from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { setCategoryId } from "../redux/slices/filter.Slice";
+import axios from "axios";
 
 const Home = ({searchValue}) => {
 const categoryId = useSelector(state => state.filter.categoryId);
@@ -38,15 +39,21 @@ dispatch(setCategoryId(id));
   const search = searchValue ? `search=${searchValue }` : '';
 
   React.useEffect(() => {
-    fetch(
-      `https://646e2d419c677e23218b38c7.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((arr) => {
-        setItems(arr);
-      });
+    axios.get(`https://646e2d419c677e23218b38c7.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
+    .then(res =>{
+      setItems(res.data);
+    })
+  
+
+    // fetch(
+    //   `https://646e2d419c677e23218b38c7.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+    // )
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((arr) => {
+    //     setItems(arr);
+    //   });
   }, [categoryId, sortType, searchValue, currentPage]);
 
   const pizzas = items.filter(obj => {
@@ -72,11 +79,7 @@ dispatch(setCategoryId(id));
       <div class="content__items">
         {pizzas}
         
-      </div>
-
-
-
-      
+      </div> 
       <Pagination onChangePage={(number) => setCurrentPage(number)}/>
     </>
   );

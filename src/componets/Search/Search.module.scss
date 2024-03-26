@@ -11,25 +11,22 @@ left: -130px;
     font-size: 15px;
     padding-left: 50px;
     transition: all 0.15s ease-in-out;
-    &:focus{
-        border: 1px solid rgba(0,0,0,0.5);
-        width:400px;
-    }
+
 }
 .icon{
     
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 30px;
     opacity: 0.5;
     position: relative;
-    top:13px;
-    left:40px;
+    top:11px;
+    left:35px;
     cursor: pointer;
 }
 
 .cleanIcon{
     position: relative;
-    top:10px;
+    top:7px;
     right:35px;
     
     &:hover{
